@@ -5,7 +5,7 @@ import * as path from 'path';
  async function connect() {
   await createConnection({
     type:"mongodb",
-    host: "mongodb+srv://Gz_202104:124578@cluster0.cc2rf.mongodb.net/movies?retryWrites=true&w=majority",
+    host: "mongodb+srv:%2F%2FGz_202104:%3C124578%2F%3E@cluster0.cc2rf.mongodb.net%2FmyFirstDatabase?retryWrites=true&w=majority",
     entities: [
       path.join(__dirname, '../entity/**/**.ts')
     ],
