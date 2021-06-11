@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev":"nodemon src/index.ts --exec ts-node"
+    "dev": "nodemon src/index.ts --exec ts-node"
   },
   "author": "Gustavo Cacharuco",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "moment": "^2.23.0",
     "mongodb": "^3.6.9",
     "mongoose": "^5.12.13",
+    "mysql": "^2.18.1",
     "numeral": "^2.0.6",
     "path": "^0.12.7",
     "pdfmake": "^0.1.36",
