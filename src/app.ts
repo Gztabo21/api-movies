@@ -1,9 +1,8 @@
 import * as express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
+import { CategoryResolver } from './resolvers/CatergoryResolver';
 
-import { PingResolver } from "./resolvers/Ping";
-// import { ProductResolver } from "./resolvers/ProductResolver";
 
  async function startServer():Promise<any> {
 
@@ -11,12 +10,12 @@ import { PingResolver } from "./resolvers/Ping";
 
   const server = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [PingResolver],
+      resolvers: [CategoryResolver],
       validate: false
     }),
   });
 
-  server.applyMiddleware({ app, path: "/graphql" });
+  server.applyMiddleware({ app, path: "/api/v1/" });
 
   return app;
 }
