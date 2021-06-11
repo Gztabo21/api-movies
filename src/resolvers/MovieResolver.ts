@@ -19,7 +19,7 @@ export class MovieResolver {
   }
   @Mutation(()=>Movie)
   async movie(@Arg("id")id:number){
-      return await Movie.findOne(id) 
+      return await Movie.findOne(id,{relations:['userId']}) 
   }
   // delete
   @Mutation(()=>Boolean)

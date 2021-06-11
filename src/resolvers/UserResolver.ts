@@ -1,4 +1,5 @@
  
+import { query } from 'express';
 import {Query, Resolver, Mutation,Arg, Int} from 'type-graphql'
 import { User } from '../entity/user';
 import { UserModel } from '../moduls/users';
@@ -8,8 +9,7 @@ export class UserResolver {
   // add
   @Mutation(()=> Boolean)
   async createUser(@Arg("user")user:UserModel){
-    
-    //await User.insert(user)
+    User.create(user)
     return true
   }
   // getAll
@@ -18,7 +18,7 @@ export class UserResolver {
     return User.find({relations:['movieIds']})
   }
   
-  @Mutation(()=>User)
+  @Query(()=>User)
   user(@Arg("id",()=> Int)id:number){
       return User.findOne(id) 
   }

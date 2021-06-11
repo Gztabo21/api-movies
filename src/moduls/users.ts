@@ -14,7 +14,7 @@ export class UserModel {
     @Field({nullable:true})
     password:string;
     
-    @Field(type=>Int,{nullable:true})
+    @Field(type=>[MovieModel],{nullable:true})
     movieIds:MovieModel[];
 
     @Field({nullable:true})

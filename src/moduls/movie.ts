@@ -1,4 +1,5 @@
-import { Field, InputType, ObjectType } from "type-graphql";
+import { Field, InputType, Int, ObjectType } from "type-graphql";
+import { User } from "../entity/user";
 
 @InputType()
 export class MovieModel {
@@ -8,6 +9,8 @@ export class MovieModel {
     name: string;
     @Field({nullable:true})
     start:number;
+    @Field(()=>Int)
+    userId:User;
     @Field({nullable:true})
     createdAt:Date;
     @Field({nullable:true})
