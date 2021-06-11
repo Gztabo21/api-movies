@@ -1,4 +1,5 @@
-import { Field, InputType } from "type-graphql";
+import { Field, InputType, Int } from "type-graphql";
+import { MovieModel } from "./movie"
 
 @InputType()
 export class UserModel {
@@ -12,6 +13,10 @@ export class UserModel {
     email:string;
     @Field({nullable:true})
     password:string;
+    
+    @Field(type=>Int,{nullable:true})
+    movieIds:MovieModel[];
+
     @Field({nullable:true})
     createdAt:Date;
     @Field({nullable:true})

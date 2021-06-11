@@ -1,4 +1,5 @@
-import { Field, InputType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
+
 @InputType()
 export class ActorModel{
     @Field({nullable:true})

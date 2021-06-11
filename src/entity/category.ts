@@ -12,6 +12,7 @@ export class Category extends BaseEntity{
     @Field()
     @Column()
     name:string;
+    @Field(()=>[Movie])
     @OneToMany(type=>Movie,movie =>movie.id)
     movieIds:Movie[]
     
