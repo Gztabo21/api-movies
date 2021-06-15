@@ -1,8 +1,9 @@
 import { Field, ObjectType } from "type-graphql";
-import { Entity, PrimaryGeneratedColumn, Column ,OneToOne,OneToMany, ManyToOne, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column ,OneToOne,OneToMany, ManyToOne, BaseEntity, JoinColumn } from "typeorm";
 import { Movie }from'./movie';
 
 @ObjectType()
+
 @Entity()
 export class User extends BaseEntity {
     @Field()
@@ -20,9 +21,12 @@ export class User extends BaseEntity {
     @Field()
     @Column()
     password:string;
+
     @Field(()=>[Movie])
-    @OneToMany(type=>Movie,movie => movie.id,{cascade:true})
+    @OneToMany(type=>Movie, movie => movie.userId,{eager:true})
+    @JoinColumn()
     movieIds:Movie[]
+
     @Field()
     @Column()
     createdAt:Date;

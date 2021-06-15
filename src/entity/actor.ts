@@ -13,9 +13,7 @@ export class Actor extends BaseEntity {
     @Field()
     @Column()
     lastname: string;
-    @Field(()=>Movie)
-    @ManyToOne(type=>Movie,movie=>movie.id)
-    movieId:Movie;
+    
     @Field()
     @Column()
     createdAt:Date;

@@ -1,8 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column ,OneToOne,OneToMany, ManyToOne, ManyToMany, JoinTable, BaseEntity, Any } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column ,OneToOne,OneToMany, ManyToOne, ManyToMany, JoinTable, BaseEntity, Any, JoinColumn } from "typeorm";
 import {User} from './user';
 import {Actor} from'./actor';
 import { Category } from './category';
 import { Field, ObjectType } from "type-graphql";
+import { ActorModel } from "../moduls/actor";
+import { join } from "path";
 @ObjectType()
 @Entity()
 export class Movie extends BaseEntity {
@@ -15,17 +17,20 @@ export class Movie extends BaseEntity {
     @Field()
     @Column()
     start:number;
+    
     @Field(()=>Category)
-    @ManyToOne(type=>Category,category => category.id)
+    @ManyToOne(type=>Category,category => category.id,{cascade:true})
     categoryId:Category
+
     @Field(()=>User)
-    @ManyToOne(type=>User,user=>user.id)
+    @ManyToOne(type=>User,user=>user.id,{cascade:true})
+    @JoinColumn({ name: 'userId' })
     userId:User;
 
-    /* @Field(()=>[Actor]) */
-    @ManyToMany(()=>Actor)
+   
+    @ManyToMany(()=> Actor)
     @JoinTable()
-    Actorids:Actor[]
+    Actor:Promise<Actor[]>
 
     @Field()
     @Column()

@@ -1,6 +1,7 @@
  
 import { query } from 'express';
-import {Query, Resolver, Mutation,Arg, Int} from 'type-graphql'
+import {Query, Resolver, Mutation,Arg, Int, Ctx, Authorized} from 'type-graphql'
+import { ContextParamMetadata } from 'type-graphql/dist/metadata/definitions';
 import { User } from '../entity/user';
 import { UserModel } from '../moduls/users';
 
@@ -13,9 +14,10 @@ export class UserResolver {
     return true
   }
   // getAll
+  @Authorized()
   @Query(() => [User])
-  users() {
-    return User.find({relations:['movieIds']})
+  users(@Arg("offset",()=> Int)offset?:number, @Arg("limit",()=> Int)limit?:number) {
+    return User.find()
   }
   
   @Query(()=>User)

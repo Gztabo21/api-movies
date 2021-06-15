@@ -12,19 +12,23 @@ export class Category extends BaseEntity{
     @Field()
     @Column()
     name:string;
+ 
     @Field(()=>[Movie])
-    @OneToMany(type=>Movie,movie =>movie.id)
+    @OneToMany(type=>Movie,movie =>movie.categoryId)
     movieIds:Movie[]
     
     @Field()
     @Column({default: () => 'CURRENT_TIMESTAMP'})
     createdAt:Date;
+ 
     @Field()
     @Column({default:() => 'CURRENT_TIMESTAMP'})
     updatedAt:Date;
+ 
     @Field()
     @Column({default:0,nullable:true})
     Createdby:number;
+ 
     @Field()
     @Column({default:0,nullable:true})
     Updatedby: number;
