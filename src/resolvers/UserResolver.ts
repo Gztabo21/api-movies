@@ -4,13 +4,17 @@ import {Query, Resolver, Mutation,Arg, Int, Ctx, Authorized} from 'type-graphql'
 import { ContextParamMetadata } from 'type-graphql/dist/metadata/definitions';
 import { User } from '../entity/user';
 import { UserModel } from '../moduls/users';
+import * as bcrypt from 'bcrypt'
 
 @Resolver()
 export class UserResolver {
   // add
   @Mutation(()=> Boolean)
   async createUser(@Arg("user")user:UserModel){
+    user.password = await bcrypt.hash(user.password,12)
+    console.log(user)
     User.create(user)
+    
     return true
   }
   // getAll
@@ -35,6 +39,5 @@ export class UserResolver {
   async updateUser(@Arg("id")id:number,@Arg("user")user:UserModel){
     await User.update({id},user)
     return true
-
   }
 }
