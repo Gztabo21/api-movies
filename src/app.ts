@@ -6,7 +6,7 @@ import { CategoryResolver } from './resolvers/CatergoryResolver';
 import { UserResolver } from './resolvers/UserResolver';
 import { MovieResolver } from './resolvers/movieResolver';
 import { ActorResolver } from './resolvers/ActorResolver';
-import { customAuthChecker } from './auth/auth';
+import { customAuthChecker,CompetitorInterceptor, ErrorInterceptor } from './middlewares/auth';
 import { LoginResolver } from "./resolvers/LoginResolver";
 
 const path:string = "/api/v1/"
@@ -23,6 +23,7 @@ const path:string = "/api/v1/"
         ActorResolver,
         LoginResolver
       ],
+      globalMiddlewares:[CompetitorInterceptor,ErrorInterceptor],
       validate: false,
       authChecker: customAuthChecker
     }),
