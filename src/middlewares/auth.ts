@@ -4,17 +4,15 @@ export const customAuthChecker: AuthChecker<any> = (
     { root, args, context, info },
     roles,
   ) => {
-
-      console.log('role:',roles,'root:',root,'args:',args,'context:',context,'info:',info)
-    // here you can read user from context
-    // and check his permission in db against `roles` argument
-    // that comes from `@Authorized`, eg. ["ADMIN", "MODERATOR"]
-  
-    return true; // or false if access denied
+    const {authorization}= context
+    let res = authorization !== undefined ?  true: false
+      // verificar el toquen 
+    console.log(res,authorization)
+    return res; // or false if access denied
   };
   export const CompetitorInterceptor: MiddlewareFn<any> = async ({context,info}, next) => {
-    const {req}= context
-    console.log(req.headers['authorization'])
+    const {}= context
+    console.log()
    
     return next();
   };

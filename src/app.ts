@@ -23,17 +23,13 @@ const path:string = "/api/v1/"
         ActorResolver,
         LoginResolver
       ],
-      globalMiddlewares:[CompetitorInterceptor,ErrorInterceptor],
+      globalMiddlewares:[ErrorInterceptor],
       validate: false,
       authChecker: customAuthChecker
     }),
-    context : ({req})=>{
-      const context = {
-        req,
-        user: req.user
-      }
-      return context
-    }
+
+    context: ({req}) => ({'authorization':req.headers.authorization})
+     
     
   });
  /*  app.use(path,jwt({secret: "TypeGraphQL",

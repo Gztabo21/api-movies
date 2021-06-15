@@ -1,4 +1,4 @@
-import { Arg, Args, Ctx, Mutation, Resolver } from "type-graphql";
+import { Arg, Args, Authorized, Ctx, Mutation, Resolver } from "type-graphql";
 import { ContextParamMetadata } from "type-graphql/dist/metadata/definitions";
 import { User } from '../entity/user';
 import * as bcrypt from 'bcrypt';
@@ -7,6 +7,7 @@ import { throwError } from "rxjs";
 @Resolver()
 export class LoginResolver{
     @Mutation(()=>String)
+    @Authorized()
     async login(@Arg("email")email:string,@Arg("password")pasword:string,@Ctx() ctx: ContextParamMetadata){
         const messageError = 'User o password incorrect'
         const users = await User.find({email})
