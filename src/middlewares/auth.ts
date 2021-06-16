@@ -1,4 +1,6 @@
 import { AuthChecker, MiddlewareFn } from "type-graphql";
+import * as jwt from "jsonwebtoken"
+
 
 export const customAuthChecker: AuthChecker<any> = (
     { root, args, context, info },
@@ -6,19 +8,31 @@ export const customAuthChecker: AuthChecker<any> = (
   ) => {
     const {authorization}= context
     let res = authorization !== undefined ?  true: false
+    if(res){
+      jwt.verify(authorization,'lamercanciadelatienda',(error,decoded)=>{
+        console.log(decoded)
+      /*   if(!decoded){
+          console.log()
+         }
+      else{
+          return action(req,res).then(()=>next).catch(err=>next(err))
+      } */
+      })
+    }
       // verificar el toquen 
-    console.log(res,authorization)
+    console.log(context)
     return res; // or false if access denied
   };
   export const CompetitorInterceptor: MiddlewareFn<any> = async ({context,info}, next) => {
-    const {}= context
-    console.log()
+    const {req}= context
+    console.log(req)
    
     return next();
   };
   // handler error 
   export const ErrorInterceptor: MiddlewareFn<any> = async ({ context, info }, next) => {
     try {
+      console.log(context)
       return await next();
     } catch (err) {
       // write error to file log

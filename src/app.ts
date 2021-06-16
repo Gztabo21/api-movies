@@ -8,6 +8,9 @@ import { MovieResolver } from './resolvers/movieResolver';
 import { ActorResolver } from './resolvers/ActorResolver';
 import { customAuthChecker,CompetitorInterceptor, ErrorInterceptor } from './middlewares/auth';
 import { LoginResolver } from "./resolvers/LoginResolver";
+import * as dotenv from 'dotenv';
+
+dotenv.config({path:'../.env'});
 
 const path:string = "/api/v1/"
  async function startServer():Promise<any> {

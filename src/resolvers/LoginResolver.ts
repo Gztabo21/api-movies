@@ -7,7 +7,6 @@ import { throwError } from "rxjs";
 @Resolver()
 export class LoginResolver{
     @Mutation(()=>String)
-    @Authorized()
     async login(@Arg("email")email:string,@Arg("password")pasword:string,@Ctx() ctx: ContextParamMetadata){
         const messageError = 'User o password incorrect'
         const users = await User.find({email})
